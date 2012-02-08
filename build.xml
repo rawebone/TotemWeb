@@ -1,0 +1,10 @@
+<project name="MyProject" default="dist" basedir=".">
+    <description>
+        TotemMVC build script
+    </description>
+    <property name="composer_path" value="" />
+    
+    <target name="init">
+        
+    </target>
+</project>

@@ -1,0 +1,28 @@
+{
+    "name": "TotemMVC",
+    "version": "0.0.1a",
+    "type": "framework",
+    "licence": "MIT",
+    "authors": {
+        "name": "nrawe",
+        "email": "nrawe88@gmail.com"
+    },
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "config": {
+        "vendor-dir": "builds/"
+    },
+    "repositories": {
+        "Respect/Rest": {
+            "vcs": {
+                "url": "git://github.com/Respect/Rest.git"
+            }
+        },
+        "Pheasant": {
+            "vcs": {
+                "url": "git://github.com/lox/pheasant.git"
+            }
+        }
+    }
+}
