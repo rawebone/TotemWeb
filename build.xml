@@ -1,10 +1,30 @@
-<project name="MyProject" default="dist" basedir=".">
+<project name="TotemMVC" default="make" basedir=".">
     <description>
         TotemMVC build script
     </description>
-    <property name="composer_path" value="" />
     
-    <target name="init">
+    <!-- These properties should be overriden by the commandline -->
+    <property name="default" value="" />
+    <property name="composer_path" value="" />
+    <property name="output_dir" value="build/" />
+    
+    <target name="make">
+        <mkdir dir="${default}/${output_dir}" />
         
+        <!-- Get dependencies for Totem -->
+        <exec executable="php">
+            <arg value="${composer_path}/composer.phar --no-interaction install" />
+        </exec>
+
+        <copy todir="${default}/${output_dir}/TotemMVC/">
+            <fileset dir="src/" />
+        </copy>
+        
+        <exec command="cd ${default}/${output_dir}/Respect/Rest/ && make phar" />
+        <copy file="${default}/${output_dir}/Respect/Rest/Rest.phar" tofile="${default}/${output_dir}/TotemMVC/lib/Rest.phar" />
+        
+        <exec command="linker">
+            <arg value="" />
+        </exec>
     </target>
 </project>
