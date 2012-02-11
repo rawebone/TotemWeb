@@ -1,28 +1,95 @@
 # TotemMVC
 
-The TotemMVC project aims to provide a lightweight, easy-to-deploy, no frills MVC framework, leveraging Open Source Components.
+The TotemMVC project aims to provide a fast, flexible and easy to use MVC
+framework.
 
-Goals
-------------
+Why
+--------
 
- - To create a lightweight MVC framework
- - To follow the principles of SOLID
- - To create an application without a global state for manageable dependencies
+I look around at other frameworks at lot, and this is not my first attempt
+at creating one. I've been looking for something which meets my requirements
+as a developer: fast, easy to install and quick to try things out with. This
+is not a case of NIH syndrome- this project has a definite goal to achieve which
+I have not found supported in any other frameworks.
 
+There are lots of great frameworks out there that attempt to provide a full
+stack with everything you could possibly need. If that's what you require,
+then this one isn't for you.
 
-Building
--------------
+The overall goal of Totem is not to be all encompassing. Totem's traditionally
+represent ancestors in many cultures, and that's why I've taken it as the name
+for this project. TotemMVC aims to be the ancestor of your application. It
+doesn't ship with an ORM, but if you want to use one, you can.
+You want to use <your favourite view system>, then you can with just some simple
+configuration changes to your webserver setup.
 
-TotemMVC uses the following Open Source components:
+This project gives you a setup to do basic tasks with. You don't have to keep
+using them, or loading them. How your application evolves once you've downloaded
+is entirely up to you, the developer. With the default setup, if you're requirements
+change it should be easy to port to another framework.
+ 
+Use Cases
+---------
 
- - [Respect](https://github.com/Respect/Rest): Thin RESTful Client for PHP5.3
- - [TotemView] (https://github.com/nrawe/TotemView): 
+#### I have an idea that I want to prototype
 
-As such, Totem doesn't contain all of the packages needed to be built but rather the build scripts to make a whole package. This allows us to use [composer](https://github.com/composer/composer), while keeping the actual repository for only new components.
+For many developers, ideas come like a flash of lightening- a big boom with lots
+of energy empowering you to create something. It doesn't last long, and the
+more time between fingers to keyboard the more chance that you will not capture
+the idea at it's fullest.
 
-Building is quite straight forward, but you will need to have the following installed:
+The goal of Totem is to be so straight forward that you can have a basic prototype
+going as soon as possible (depending on the project complexity of course).
 
- - [Ant] (http://ant.apache.org/)
- - [Composer] (https://github.com/composer/composer)
- - [PHPSpec] (http://www.phpspec.net)
+#### I like a number of different components from other vendors, but no framework brings them together.
 
+You have full control of your runtime. The libraries loaded are configurable,
+and apart from the Core Totem Namespace, the framework has no dependencies.
+
+#### I want to be able to test upgrades without having to copy paste all over the place
+
+Totem can be overridden by environmental settings exposed through your webserver.
+This allows it to be configured quite quickly. Considering this basic setup.
+
+http://www.yourdomain.com
+http://dev.yourdomain.com
+
+This can be achieved using a minimal web configuration, for instance in Apache:
+
+<VirtualHost *:80>
+    ServerName www.yourdomain.com
+    DocumentRoot /path/to/totem/webroot/
+
+    #   Totem Config
+    SetEnv TotemAppPath /path/to/totem/application/production/
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerName dev.yourdomain.com
+    DocumentRoot /path/to/totem/webroot/
+
+    #   Totem Config
+    SetEnv TotemAppPath /path/to/totem/application/development/
+</VirtualHost>
+
+With one folder structure:
+
+/path/to/totem
+    /application
+        /development
+        /production
+    /lib
+    /webroot
+
+You want to test an upgrade to the core framework on your development environment?
+
+<VirtualHost *:80>
+    ServerName dev.yourdomain.com
+    DocumentRoot /path/to/totem/webroot/
+
+    #   Totem Config
+    SetEnv TotemAppPath /path/to/totem/application/development/
+    SetEnv TotemLibPath /path/to/totem/lib<x>/
+</VirtualHost>
+
+It should be that simple.
