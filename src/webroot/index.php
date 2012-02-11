@@ -1,4 +1,10 @@
 <?php
+/**
+ * TotemMVC Framework Entry Point
+ * 
+ * @license http://www.opensource.org/licenses/MIT
+ * @author Nick Rawe
+ */
 
 $base = dirname(__DIR__);
 define('TOTEM_APP', (isset($_ENV['TotemAppPath']) ? $_ENV['TotemAppPath'] : "$base/application/production/"));
