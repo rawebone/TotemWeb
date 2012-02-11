@@ -56,21 +56,21 @@ http://dev.yourdomain.com
 
 This can be achieved using a minimal web configuration, for instance in Apache:
 
-    &lt;VirtualHost *:80&gt;
+    <VirtualHost *:80>
         ServerName www.yourdomain.com
         DocumentRoot /path/to/totem/webroot/
 
         #   Totem Config
         SetEnv TotemAppPath /path/to/totem/application/production/
-    &lt;/VirtualHost&gt;
+    </VirtualHost>
 
-    &lt;VirtualHost *:80&gt;
+    <VirtualHost *:80>
         ServerName dev.yourdomain.com
         DocumentRoot /path/to/totem/webroot/
 
         #   Totem Config
         SetEnv TotemAppPath /path/to/totem/application/development/
-    &lt;/VirtualHost&gt;
+    </VirtualHost>
 
 With one folder structure:
 
@@ -83,13 +83,13 @@ With one folder structure:
 
 You want to test an upgrade to the core framework on your development environment?
 
-    &lt;VirtualHost *:80&gt;
+    <VirtualHost *:80>
         ServerName dev.yourdomain.com
         DocumentRoot /path/to/totem/webroot/
 
         #   Totem Config
         SetEnv TotemAppPath /path/to/totem/application/development/
-        SetEnv TotemLibPath /path/to/totem/lib&lt;x&gt;/
-    &lt;/VirtualHost&gt;
+        SetEnv TotemLibPath /path/to/totem/lib<x>/
+    </VirtualHost>
 
 It should be that simple.
