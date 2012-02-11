@@ -56,40 +56,40 @@ http://dev.yourdomain.com
 
 This can be achieved using a minimal web configuration, for instance in Apache:
 
-<VirtualHost *:80>
-    ServerName www.yourdomain.com
-    DocumentRoot /path/to/totem/webroot/
+    &lt;VirtualHost *:80&gt;
+        ServerName www.yourdomain.com
+        DocumentRoot /path/to/totem/webroot/
 
-    #   Totem Config
-    SetEnv TotemAppPath /path/to/totem/application/production/
-</VirtualHost>
+        #   Totem Config
+        SetEnv TotemAppPath /path/to/totem/application/production/
+    &lt;/VirtualHost&gt;
 
-<VirtualHost *:80>
-    ServerName dev.yourdomain.com
-    DocumentRoot /path/to/totem/webroot/
+    &lt;VirtualHost *:80&gt;
+        ServerName dev.yourdomain.com
+        DocumentRoot /path/to/totem/webroot/
 
-    #   Totem Config
-    SetEnv TotemAppPath /path/to/totem/application/development/
-</VirtualHost>
+        #   Totem Config
+        SetEnv TotemAppPath /path/to/totem/application/development/
+    &lt;/VirtualHost&gt;
 
 With one folder structure:
 
-/path/to/totem
-    /application
-        /development
-        /production
-    /lib
-    /webroot
+    /path/to/totem
+        /application
+            /development
+            /production
+        /lib
+        /webroot
 
 You want to test an upgrade to the core framework on your development environment?
 
-<VirtualHost *:80>
-    ServerName dev.yourdomain.com
-    DocumentRoot /path/to/totem/webroot/
+    &lt;VirtualHost *:80&gt;
+        ServerName dev.yourdomain.com
+        DocumentRoot /path/to/totem/webroot/
 
-    #   Totem Config
-    SetEnv TotemAppPath /path/to/totem/application/development/
-    SetEnv TotemLibPath /path/to/totem/lib<x>/
-</VirtualHost>
+        #   Totem Config
+        SetEnv TotemAppPath /path/to/totem/application/development/
+        SetEnv TotemLibPath /path/to/totem/lib&lt;x&gt;/
+    &lt;/VirtualHost&gt;
 
 It should be that simple.
