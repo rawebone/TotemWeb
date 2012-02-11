@@ -1,5 +1,5 @@
 <?php
-namespace Totem\Common;
+namespace Totem\Core;
 
 interface EventInterface
 {

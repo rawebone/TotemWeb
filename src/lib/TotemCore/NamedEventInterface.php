@@ -1,7 +1,7 @@
 <?php
-namespace Totem\Common;
+namespace Totem\Core;
 
-interface NamedEventInterface extends Common\EventInterface
+interface NamedEventInterface extends Core\EventInterface
 {
     public function add($name, $fn);
     public function remove($name);

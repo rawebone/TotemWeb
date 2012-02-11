@@ -1,15 +1,15 @@
 # TotemMVC
 
 The TotemMVC project aims to provide a fast, flexible and easy to use MVC
-framework.
+framework for PHP5.3.
 
 Why
 --------
 
-I look around at other frameworks at lot, and this is not my first attempt
+I look around at other frameworks a lot, and this is not my first attempt
 at creating one. I've been looking for something which meets my requirements
 as a developer: fast, easy to install and quick to try things out with. This
-is not a case of NIH syndrome- this project has a definite goal to achieve which
+is not a case of NIH syndrome- this project has a definite goal which
 I have not found supported in any other frameworks.
 
 There are lots of great frameworks out there that attempt to provide a full
@@ -18,14 +18,15 @@ then this one isn't for you.
 
 The overall goal of Totem is not to be all encompassing. Totem's traditionally
 represent ancestors in many cultures, and that's why I've taken it as the name
-for this project. TotemMVC aims to be the ancestor of your application. It
-doesn't ship with an ORM, but if you want to use one, you can.
-You want to use <your favourite view system>, then you can with just some simple
-configuration changes to your webserver setup.
+for this project. TotemMVC aims to be the ancestor of your application: how your
+application evolves once you've downloaded is entirely up to you, the developer.
+
+Totem doesn't enforce upon you any restrictions in terms of Components. It
+doesn't ship with an ORM because I don't believe in them, if you want one it's
+a simple case of amending the boot strap of your application (the TotemApp object).
 
 This project gives you a setup to do basic tasks with. You don't have to keep
-using them, or loading them. How your application evolves once you've downloaded
-is entirely up to you, the developer. With the default setup, if you're requirements
+using them, or loading them.  With the default setup, if you're requirements
 change it should be easy to port to another framework.
  
 Use Cases

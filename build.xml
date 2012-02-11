@@ -6,25 +6,60 @@
     <!-- These properties should be overriden by the commandline -->
     <property name="default" value="" />
     <property name="composer_path" value="" />
-    <property name="output_dir" value="build/" />
     
     <target name="make">
-        <mkdir dir="${default}/${output_dir}" />
+        <mkdir dir="${default}build" />
         
         <!-- Get dependencies for Totem -->
         <exec executable="php">
-            <arg value="${composer_path}/composer.phar --no-interaction install" />
+            <arg value="${composer_path}composer.phar --no-interaction install" />
         </exec>
 
-        <copy todir="${default}/${output_dir}/TotemMVC/">
-            <fileset dir="src/" />
+        <!-- Build the folder structure -->
+        <mkdir dir="${default}build/TotemMVC" />
+        <mkdir dir="${default}build/TotemMVC/application" />
+        <mkdir dir="${default}build/TotemMVC/application/development" />
+        <copy todir="${default}build/TotemMVC/application/development">
+            <fileset dir="src/application-dist/" />
         </copy>
+        <mkdir dir="${default}build/TotemMVC/application/production" />
+        <copy todir="${default}build/TotemMVC/application/production">
+            <fileset dir="src/application-dist/" />
+        </copy>
+        <mkdir dir="${default}build/TotemMVC/lib/" />
+        <mkdir dir="${default}build/TotemMVC/lib/SPL/" />
+        <copy file="src/lib/SPL/SplClassLoader.php" tofile="${default}build/TotemMVC/lib/SPL/SplClassLoader.php" />
+        <mkdir dir="${default}build/TotemMVC/webroot/" />
+        <copy file="src/webroot/.htaccess" tofile="${default}build/TotemMVC/webroot/.htaccess" />
+        <copy file="src/webroot/index.php" tofile="${default}build/TotemMVC/webroot/index.php" />
         
-        <exec command="cd ${default}/${output_dir}/Respect/Rest/ && make phar" />
-        <copy file="${default}/${output_dir}/Respect/Rest/Rest.phar" tofile="${default}/${output_dir}/TotemMVC/lib/Rest.phar" />
+        <!--
+            Build Default Libraries
+        -->
         
+        <!-- Respect/Rest -->
+        <exec command="cd ${default}build/Respect/Rest/ && make phar" />
+        <copy file="${default}build/Respect/Rest/Rest.phar" tofile="${default}build/TotemMVC/lib/Respect.Rest.phar" />
+        
+        <!-- Totem/Core -->
         <exec command="linker">
-            <arg value="" />
+            <arg value="-o ${default}build/TotemMVC/lib/Totem.Core.phar" />
+            <arg value="-s src/TotemMVC/lib/core_stub.php" />
+            <arg value="src/TotemMVC/lib/TotemCore/*,src/TotemMVC/lib/SPL/SplClassLoader.php" />
+        </exec>
+        
+        <!-- Totem/Model -->
+        <exec command="linker">
+            <arg value="-o ${default}build/TotemMVC/lib/Totem.Model.phar" />
+            <arg value="-s src/TotemMVC/lib/model_stub.php" />
+            <arg value="src/TotemMVC/lib/TotemModel/*,src/TotemMVC/lib/SPL/SplClassLoader.php" />
+        </exec>
+        
+        <!-- Totem/View -->
+        <exec command="linker">
+            <arg value="-o ${default}build/TotemMVC/lib/Totem.View.phar" />
+            <arg value="-s src/TotemMVC/lib/view_stub.php" />
+            <arg value="src/TotemMVC/lib/TotemView/*,src/TotemMVC/lib/SPL/SplClassLoader.php" />
         </exec>
     </target>
 </project>

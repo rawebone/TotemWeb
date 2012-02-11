@@ -1,7 +1,7 @@
 <?php
-namespace Totem\Common\Event;
+namespace Totem\Core\Event;
 
-class NamedEvent implements Common\NamedEventInterface
+class NamedEvent implements Core\NamedEventInterface
 {
     protected $events;
     

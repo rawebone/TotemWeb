@@ -1,9 +1,16 @@
 <?php
+//  --> Totem Application Entry Point
 namespace Totem\Application;
 
+//  Load libraries to be used as part of the application
+require_once "${TOTEM_LIB}Rest.phar";
+require_once "${TOTEM_LIB}Totem.View.phar";
+require_once "${TOTEM_LIB}Totem.Model.phar";
+
+use Totem\Core;
 use Respect\Rest\Router;
 
-class TotemApp
+class TotemApp implements Core\TotemApplicationInterface
 {
     protected $request;
     
