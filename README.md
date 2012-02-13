@@ -94,3 +94,30 @@ You want to test an upgrade to the core framework on your development environmen
     </VirtualHost>
 
 It should be that simple.
+
+Building
+--------
+
+This repo acts as the container for the project, and 'binaries' will be available
+from the website once it is made. We need to build the project from it's sources
+and for that, do the following (you'll need to be on *nix and have 
+[Ant](http://ant.apache.org) and [Composer](https://github.com/composer/composer) installed):
+
+    cd /path/to/sources
+    
+    # Make the base structure
+    ant init
+
+    # Gather in external projects
+    composer.phar install
+    
+    # Make the Respect/Rest package
+    cd builds/Respect/Rest
+    make phar
+    cp Rest.phar ../../TotemMVC/lib/Rest.phar
+    cd ../../../
+    
+    # Make the Totem libraries
+    ant makelibs
+    
+If all is good, you will now have a full install in your builds/TotemMVC folder.

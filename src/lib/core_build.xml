@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="TotemMVC-Core-Lib" default="make" basedir=".">
+    <description>
+        Makes the Totem.Code.phar library
+    </description>
+    <target name="init">
+        <exec executable="to.phar">
+            <arg value="-o Totem.Core.phar" />
+            <arg value="-s Totem/core_stub.php" />
+            <arg value="-f SPL/SplClassLoader.php,Totem/Core/TotemApplicationInterface.php,Totem/Core/NamedEventInterface.php,Totem/Core/EventInterface.php,Totem/Core/Event/NamedEvent.php" />
+        </exec>
+    </target>
+</project>

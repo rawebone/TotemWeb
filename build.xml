@@ -1,65 +1,36 @@
-<project name="TotemMVC" default="make" basedir=".">
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="TotemMVC" default="init" basedir="./src/">
     <description>
         TotemMVC build script
     </description>
     
     <!-- These properties should be overriden by the commandline -->
     <property name="default" value="" />
-    <property name="composer_path" value="" />
-    
-    <target name="make">
-        <mkdir dir="${default}build" />
-        
-        <!-- Get dependencies for Totem -->
-        <exec executable="php">
-            <arg value="${composer_path}composer.phar --no-interaction install" />
-        </exec>
 
+    <target name="init">
         <!-- Build the folder structure -->
-        <mkdir dir="${default}build/TotemMVC" />
-        <mkdir dir="${default}build/TotemMVC/application" />
-        <mkdir dir="${default}build/TotemMVC/application/development" />
-        <copy todir="${default}build/TotemMVC/application/development">
-            <fileset dir="src/application-dist/" />
+        <mkdir dir="${default}builds" />
+        <mkdir dir="${default}builds/TotemMVC" />
+        <mkdir dir="${default}builds/TotemMVC/application" />
+        <mkdir dir="${default}builds/TotemMVC/application/development" />
+        <copy todir="${default}builds/TotemMVC/application/development">
+            <fileset dir="application-dist/" />
         </copy>
-        <mkdir dir="${default}build/TotemMVC/application/production" />
-        <copy todir="${default}build/TotemMVC/application/production">
-            <fileset dir="src/application-dist/" />
+        <mkdir dir="${default}builds/TotemMVC/application/production" />
+        <copy todir="${default}builds/TotemMVC/application/production">
+            <fileset dir="application-dist/" />
         </copy>
-        <mkdir dir="${default}build/TotemMVC/lib/" />
-        <mkdir dir="${default}build/TotemMVC/lib/SPL/" />
-        <copy file="src/lib/SPL/SplClassLoader.php" tofile="${default}build/TotemMVC/lib/SPL/SplClassLoader.php" />
-        <mkdir dir="${default}build/TotemMVC/webroot/" />
-        <copy file="src/webroot/.htaccess" tofile="${default}build/TotemMVC/webroot/.htaccess" />
-        <copy file="src/webroot/index.php" tofile="${default}build/TotemMVC/webroot/index.php" />
-        
-        <!--
-            Build Default Libraries
-        -->
-        
-        <!-- Respect/Rest -->
-        <exec command="cd ${default}build/Respect/Rest/ && make phar" />
-        <copy file="${default}build/Respect/Rest/Rest.phar" tofile="${default}build/TotemMVC/lib/Respect.Rest.phar" />
-        
-        <!-- Totem/Core -->
-        <exec command="linker">
-            <arg value="-o ${default}build/TotemMVC/lib/Totem.Core.phar" />
-            <arg value="-s src/TotemMVC/lib/core_stub.php" />
-            <arg value="src/TotemMVC/lib/TotemCore/*,src/TotemMVC/lib/SPL/SplClassLoader.php" />
-        </exec>
-        
-        <!-- Totem/Model -->
-        <exec command="linker">
-            <arg value="-o ${default}build/TotemMVC/lib/Totem.Model.phar" />
-            <arg value="-s src/TotemMVC/lib/model_stub.php" />
-            <arg value="src/TotemMVC/lib/TotemModel/*,src/TotemMVC/lib/SPL/SplClassLoader.php" />
-        </exec>
-        
-        <!-- Totem/View -->
-        <exec command="linker">
-            <arg value="-o ${default}build/TotemMVC/lib/Totem.View.phar" />
-            <arg value="-s src/TotemMVC/lib/view_stub.php" />
-            <arg value="src/TotemMVC/lib/TotemView/*,src/TotemMVC/lib/SPL/SplClassLoader.php" />
-        </exec>
+        <mkdir dir="${default}builds/TotemMVC/lib/" />
+        <mkdir dir="${default}builds/TotemMVC/lib/SPL/" />
+        <copy file="lib/SPL/SplClassLoader.php" tofile="${default}builds/TotemMVC/lib/SPL/SplClassLoader.php" />
+        <mkdir dir="${default}builds/TotemMVC/webroot/" />
+        <copy file="webroot/.htaccess" tofile="${default}builds/TotemMVC/webroot/.htaccess" />
+        <copy file="webroot/index.php" tofile="${default}builds/TotemMVC/webroot/index.php" />
+    </target>
+    
+    <target name="makelibs">
+        <ant antfile="src/lib/core_build.xml" />
+        <ant antfile="src/lib/view_build.xml" />
+        <ant antfile="src/lib/model_build.xml" />
     </target>
 </project>
