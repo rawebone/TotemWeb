@@ -22,7 +22,7 @@ $loader->register();
 try
 {
     $application = new Application\TotemApp();
-    if ($application instanceof Totem\Core\TotemApplicationInterface)
+    if ($application instanceof Totem\Core\ApplicationInterface)
     {
         $application->run();
     }

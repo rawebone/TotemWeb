@@ -7,7 +7,7 @@
         <exec executable="to.phar">
             <arg value="-o Totem.View.phar" />
             <arg value="-s Totem/view_stub.php" />
-            <arg value="-f SPL/SplClassLoader.php,Totem/View/ViewInterface.php,Totem/View/BaseView.php" />
+            <arg value="-f Totem/View/ViewInterface.php,Totem/View/BaseView.php" />
         </exec>
     </target>
 </project>

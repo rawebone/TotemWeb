@@ -6,8 +6,9 @@ namespace Application;
 require_once TOTEM_LIB . "/Rest.phar";
 
 //  Namespaces and Aliases
+use \Respect\Rest\Router;
 
-class TotemApp implements Totem\Core\ApplicationInterface
+class TotemApp implements \Totem\Core\ApplicationInterface
 {
     protected $request;
     

@@ -1,13 +1,19 @@
 <?php
 Phar::mapPhar("Totem.Core.phar");
+Phar::interceptFileFuncs();
 
-if (!class_exists("SplClassLoader", false))
-{
-    require_once "phar://Totem.Core.phar/SPL/SplClassAutoloader";    
-}
-
-$loader = new SplClassLoader("Totem\\Core", "phar://Totem.Core.phar");
-$loader->register();
+spl_autoload_register(function ($class) {
+    if (strpos($class, "Totem\\Core") === false)
+    {
+        return;
+    }
+        
+    $class = str_replace("\\", "/", $class);
+    if (!include "phar://Totem.Core.phar/$class.php")
+    {
+        throw new \Exception("Cannot load $class");
+    }
+});
 
 __HALT_COMPILER();
 ?>

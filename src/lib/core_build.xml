@@ -7,7 +7,7 @@
         <exec executable="to.phar">
             <arg value="-o Totem.Core.phar" />
             <arg value="-s Totem/core_stub.php" />
-            <arg value="-f SPL/SplClassLoader.php,Totem/Core/TotemApplicationInterface.php,Totem/Core/NamedEventInterface.php,Totem/Core/EventInterface.php,Totem/Core/Event/NamedEvent.php" />
+            <arg value="-f Totem/Core/ApplicationInterface.php,Totem/Core/NamedEventInterface.php,Totem/Core/EventInterface.php,Totem/Core/Event/NamedEvent.php" />
         </exec>
     </target>
 </project>

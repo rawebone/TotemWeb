@@ -7,7 +7,6 @@
         <exec executable="to.phar">
             <arg value="-o Totem.Model.phar" />
             <arg value="-s Totem/model_stub.php" />
-            <arg value="-f SPL/SplClassLoader.php" />
         </exec>
     </target>
 </project>

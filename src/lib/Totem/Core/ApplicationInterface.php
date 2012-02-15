@@ -1,7 +1,7 @@
 <?php
 namespace Totem\Core;
 
-interface TotemApplicationInterface
+interface ApplicationInterface
 {
     public function run();
 }
