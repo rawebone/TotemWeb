@@ -25,8 +25,8 @@
         <copy todir="${default}builds/TotemMVC/development/">
             <fileset dir="${default}builds/TotemMVC/production/" />
         </copy>
-        <copy file="src/TotemApp.php" tofile="${default}builds/TotemMVC/production/Application/" />
-        <copy file="src/TotemApp.php" tofile="${default}builds/TotemMVC/development/Application/" />
+        <copy file="src/TotemApp.php" tofile="${default}builds/TotemMVC/production/Application/TotemApp.php" />
+        <copy file="src/TotemApp.php" tofile="${default}builds/TotemMVC/development/Application/TotemApp.php" />
 
         <mkdir dir="${default}builds/TotemMVC/lib/" />
         <mkdir dir="${default}builds/TotemMVC/lib/SPL/" />
