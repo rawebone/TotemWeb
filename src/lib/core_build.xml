@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="TotemMVC-Core-Lib" default="make" basedir=".">
     <description>
-        Makes the Totem.Code.phar library
+        Makes the Totem.Core.phar library
     </description>
-    <target name="init">
+    <target name="make">
         <exec executable="to.phar">
             <arg value="-o Totem.Core.phar" />
             <arg value="-s Totem/core_stub.php" />

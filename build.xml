@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project name="TotemMVC" default="init" basedir="./src/">
+<project name="TotemMVC" default="init" basedir=".">
     <description>
         TotemMVC build script
     </description>
@@ -11,26 +11,38 @@
         <!-- Build the folder structure -->
         <mkdir dir="${default}builds" />
         <mkdir dir="${default}builds/TotemMVC" />
-        <mkdir dir="${default}builds/TotemMVC/application" />
-        <mkdir dir="${default}builds/TotemMVC/application/development" />
-        <copy todir="${default}builds/TotemMVC/application/development">
-            <fileset dir="application-dist/" />
+        <mkdir dir="${default}builds/TotemMVC/production/" />
+        <mkdir dir="${default}builds/TotemMVC/production/Application/" />
+        <mkdir dir="${default}builds/TotemMVC/production/Application/Cache/" />
+        <mkdir dir="${default}builds/TotemMVC/production/Application/Configuration/" />
+        <mkdir dir="${default}builds/TotemMVC/production/Application/Controllers/" />
+        <mkdir dir="${default}builds/TotemMVC/production/Application/DomainObjects/" />
+        <mkdir dir="${default}builds/TotemMVC/production/Application/Lib/" />
+        <mkdir dir="${default}builds/TotemMVC/production/Application/Logs/" />
+        <mkdir dir="${default}builds/TotemMVC/production/Application/Models/" />
+        <mkdir dir="${default}builds/TotemMVC/production/Application/Views" />
+
+        <copy todir="${default}builds/TotemMVC/development/">
+            <fileset dir="${default}builds/TotemMVC/production/" />
         </copy>
-        <mkdir dir="${default}builds/TotemMVC/application/production" />
-        <copy todir="${default}builds/TotemMVC/application/production">
-            <fileset dir="application-dist/" />
-        </copy>
+        <copy file="src/TotemApp.php" tofile="${default}builds/TotemMVC/production/Application/" />
+        <copy file="src/TotemApp.php" tofile="${default}builds/TotemMVC/development/Application/" />
+
         <mkdir dir="${default}builds/TotemMVC/lib/" />
         <mkdir dir="${default}builds/TotemMVC/lib/SPL/" />
-        <copy file="lib/SPL/SplClassLoader.php" tofile="${default}builds/TotemMVC/lib/SPL/SplClassLoader.php" />
+        <copy file="src/lib/SPL/SplClassLoader.php" tofile="${default}builds/TotemMVC/lib/SPL/SplClassLoader.php" />
+        
         <mkdir dir="${default}builds/TotemMVC/webroot/" />
-        <copy file="webroot/.htaccess" tofile="${default}builds/TotemMVC/webroot/.htaccess" />
-        <copy file="webroot/index.php" tofile="${default}builds/TotemMVC/webroot/index.php" />
+        <copy file="src/webroot/.htaccess" tofile="${default}builds/TotemMVC/webroot/.htaccess" />
+        <copy file="src/webroot/index.php" tofile="${default}builds/TotemMVC/webroot/index.php" />
     </target>
     
     <target name="makelibs">
-        <ant antfile="src/lib/core_build.xml" />
-        <ant antfile="src/lib/view_build.xml" />
-        <ant antfile="src/lib/model_build.xml" />
+        <ant antfile="src/lib/core_build.xml" inheritAll="none" />
+        <move file="src/lib/Totem.Core.phar" tofile="${default}builds/TotemMVC/lib/Totem.Core.phar" />
+        <ant antfile="src/lib/view_build.xml" inheritAll="none" />
+        <move file="src/lib/Totem.View.phar" tofile="${default}builds/TotemMVC/lib/Totem.View.phar" />
+        <ant antfile="src/lib/model_build.xml" inheritAll="none" />
+        <move file="src/lib/Totem.Model.phar" tofile="${default}builds/TotemMVC/lib/Totem.Model.phar" />
     </target>
 </project>
