@@ -45,4 +45,10 @@
         <ant antfile="src/lib/model_build.xml" inheritAll="none" />
         <move file="src/lib/Totem.Model.phar" tofile="${default}builds/TotemMVC/lib/Totem.Model.phar" />
     </target>
+    
+    <target name="clean">
+        <delete file="composer.lock" />
+        <delete dir="${default}builds/Respect" />
+        <delete dir="${default}builds/TotemMVC" />
+    </target>
 </project>
