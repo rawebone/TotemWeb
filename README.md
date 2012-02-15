@@ -62,7 +62,7 @@ This can be achieved using a minimal web configuration, for instance in Apache:
         DocumentRoot /path/to/totem/webroot/
 
         #   Totem Config
-        SetEnv TotemAppPath /path/to/totem/application/production/
+        SetEnv TotemAppPath /path/to/totem/production/Application/
     </VirtualHost>
 
     <VirtualHost *:80>
@@ -70,16 +70,17 @@ This can be achieved using a minimal web configuration, for instance in Apache:
         DocumentRoot /path/to/totem/webroot/
 
         #   Totem Config
-        SetEnv TotemAppPath /path/to/totem/application/development/
+        SetEnv TotemAppPath /path/to/totem/development/Application/
     </VirtualHost>
 
 With one folder structure:
 
     /path/to/totem
-        /application
-            /development
-            /production
+        /development
+            /Application
         /lib
+        /production
+            /Application
         /webroot
 
 You want to test an upgrade to the core framework on your development environment?
@@ -89,7 +90,7 @@ You want to test an upgrade to the core framework on your development environmen
         DocumentRoot /path/to/totem/webroot/
 
         #   Totem Config
-        SetEnv TotemAppPath /path/to/totem/application/development/
+        SetEnv TotemAppPath /path/to/totem/development/Application/
         SetEnv TotemLibPath /path/to/totem/lib<x>/
     </VirtualHost>
 
