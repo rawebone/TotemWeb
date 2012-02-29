@@ -19,9 +19,6 @@ class TotemApp implements \Totem\Core\ApplicationInterface
         
         //  Setup routes
         $this->setupRoutes();
-        
-        //  Dispatch the request
-        $this->request->dispatch();
     }
     
     public function setupRoutes()
@@ -29,7 +26,7 @@ class TotemApp implements \Totem\Core\ApplicationInterface
         $r = $this->request;
         
         $r->get("/", function () {
-            echo "Hello from TotemMVC";
+            return "Hello from TotemMVC";
         });
     }
 }
