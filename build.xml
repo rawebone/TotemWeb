@@ -37,6 +37,7 @@
         <move file="src/lib/Totem.Core.phar" tofile="${default}builds/TotemWeb/totem/Totem.Core.phar" />
         
         <copy file="LICENSE" tofile="${default}builds/TotemWeb/LICENSE" />
+        <tar basedir="${default}builds/TotemWeb/" destfile="${default}builds/TotemWeb.tar.gz" compression="gzip" />
     </target>
     
     <target name="clean">
