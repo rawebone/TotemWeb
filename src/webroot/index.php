@@ -40,6 +40,21 @@ else
 define('TOTEM_APP', $app);
 define('TOTEM_PATH', $lib);
 unset($base, $app, $lib);
+
+//  Application Autoloading
+spl_autoload_register(function($class) {
+    if (strpos($class, "Application\\") === false)
+    {
+        return;
+    }
+        
+    $class = str_replace("\\", "/", $class);
+    if (!include TOTEM_APP . "$class.php")
+    {
+        throw new \Exception("Cannot load $class");
+    }
+});
+
 try
 {
     require_once "phar://" . TOTEM_PATH . "/Totem.Core.phar";
