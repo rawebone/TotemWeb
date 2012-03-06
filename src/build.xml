@@ -7,17 +7,19 @@
     Homepage: http://gettotem.com
 -->
 <project name="TotemWeb Management Tools" basedir="." >
-    <task name="promote-changes">
+    <target name="promote-changes">
         <tstamp />
         <property name="bu-path" value="bu/${TSTAMP}" />
         
         <!-- Create backup -->
-        <mkdir name="${bu-path}" />
-        <copy todir="${bu-path}/production/" dir="production" />
+        <mkdir dir="${bu-path}" />
+        <copy todir="${bu-path}/production/">
+            <fileset dir="production/" />
+        </copy>
         
         <!-- Move development to production -->
         <copy todir="production/Application">
-            <fileset dir="development/Application" includes="*" excludes="Cache/** Logs/**" />
+            <fileset dir="development/Application" includes="*/**" />
         </copy>
-    </task>
+    </target>
 </project>
