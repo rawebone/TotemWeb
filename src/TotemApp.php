@@ -1,33 +1,24 @@
 <?php
+/**
+ * This file is part of the TotemMVC project
+ * 
+ * @author Nick Rawe
+ * @license http://www.opensource.org/licenses/MIT
+ * @homepage http://gettotem.com
+ */
+
 //  ---> Totem Application Entry Point
 namespace Application;
 
-//  Libraries
-require_once TOTEM_LIB . "/Rest.phar";
+//  Include components here
 
-//  Namespaces and Aliases
-use \Respect\Rest\Router;
+//  Define Namespaces and Aliases
 
 class TotemApp implements \Totem\Core\ApplicationInterface
 {
-    protected $request;
-    
     public function run()
     {
-        //  Create the router
-        $this->request = new Router();
-        
-        //  Setup routes
-        $this->setupRoutes();
-    }
-    
-    public function setupRoutes()
-    {
-        $r = $this->request;
-        
-        $r->get("/", function () {
-            return "Hello from TotemMVC";
-        });
+        echo "Hello, from TotemMVC";
     }
 }
 

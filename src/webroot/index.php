@@ -1,26 +1,48 @@
 <?php
 /**
- * TotemMVC Framework Entry Point
+ * This file is part of the TotemMVC project
  * 
- * @license http://www.opensource.org/licenses/MIT
  * @author Nick Rawe
+ * @license http://www.opensource.org/licenses/MIT
+ * @homepage http://gettotem.com
  */
 
-ini_set("display_errors", E_ALL);
+$base = dirname(dirname(__DIR__)); $app = ""; $lib = "";
 
-$base = dirname(__DIR__);
-define('TOTEM_APP', (isset($_ENV['TotemAppPath']) ? $_ENV['TotemAppPath'] : "$base/production"));
-define('TOTEM_LIB', (isset($_ENV['TotemLibPath']) ? $_ENV['TotemLibPath'] : "$base/lib"));
-unset($base);
+// Get the application path
+if (isset($_SERVER['TotemAppPath']))
+{
+    $app = $_SERVER['TotemAppPath'];
+}
+elseif (strpos(ini_get("variables_order"), "E") !== false && isset($_ENV['TotemAppPath']))
+{
+    $app = $_ENV['TotemLibPath'];
+}
+else
+{
+    $app = "$base/production";
+}
 
-require_once TOTEM_LIB . "/SPL/SplClassLoader.php";
-require_once "phar://" . TOTEM_LIB . "/Totem.Core.phar";
+// Get the library path
+if (isset($_SERVER['TotemLibPath']))
+{
+    $lib = $_SERVER['TotemLibPath'];
+}
+elseif (strpos(ini_get("variables_order"), "E") !== false && isset($_ENV['TotemLibPath']))
+{
+    $lib = $_ENV['TotemLibPath'];
+}
+else
+{
+    $lib = "$base/";
+}
 
-$loader = new SplClassLoader("Application", TOTEM_APP);
-$loader->register();
-
+define('TOTEM_APP', $app);
+define('TOTEM_PATH', $lib);
+unset($base, $app, $lib);
 try
 {
+    require_once "phar://" . TOTEM_PATH . "/Totem.Core.phar";
     $application = new Application\TotemApp();
     if ($application instanceof Totem\Core\ApplicationInterface)
     {

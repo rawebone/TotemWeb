@@ -1,4 +1,12 @@
 <?php
+/**
+ * This file is part of the TotemMVC project
+ * 
+ * @author Nick Rawe
+ * @license http://www.opensource.org/licenses/MIT
+ * @homepage http://gettotem.com
+ */
+
 Phar::mapPhar("Totem.Core.phar");
 Phar::interceptFileFuncs();
 

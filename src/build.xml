@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    This file is part of the TotemMVC project and provides tools for managing the website.
+    
+    Licence: http://www.opensource.org/licenses/MIT
+    Author: N Rawe
+    Homepage: http://gettotem.com
+-->
+<project name="TotemWeb Management Tools" basedir="." >
+    <task name="promote-changes">
+        <tstamp />
+        <property name="bu-path" value="bu/${TSTAMP}" />
+        
+        <!-- Create backup -->
+        <mkdir name="${bu-path}" />
+        <copy todir="${bu-path}/production/" dir="production" />
+        
+        <!-- Move development to production -->
+        <copy todir="production/Application">
+            <fileset dir="development/Application" includes="*" excludes="Cache/** Logs/**" />
+        </copy>
+    </task>
+</project>

@@ -1,54 +1,47 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<project name="TotemMVC" default="init" basedir=".">
+<project name="TotemWeb" default="make" basedir=".">
     <description>
-        TotemMVC build script
+        TotemWeb build script
     </description>
     
     <!-- These properties should be overriden by the commandline -->
     <property name="default" value="" />
 
-    <target name="init">
+    <target name="make">
         <!-- Build the folder structure -->
         <mkdir dir="${default}builds" />
-        <mkdir dir="${default}builds/TotemMVC" />
-        <mkdir dir="${default}builds/TotemMVC/production/" />
-        <mkdir dir="${default}builds/TotemMVC/production/Application/" />
-        <mkdir dir="${default}builds/TotemMVC/production/Application/Cache/" />
-        <mkdir dir="${default}builds/TotemMVC/production/Application/Configuration/" />
-        <mkdir dir="${default}builds/TotemMVC/production/Application/Controllers/" />
-        <mkdir dir="${default}builds/TotemMVC/production/Application/DomainObjects/" />
-        <mkdir dir="${default}builds/TotemMVC/production/Application/Lib/" />
-        <mkdir dir="${default}builds/TotemMVC/production/Application/Logs/" />
-        <mkdir dir="${default}builds/TotemMVC/production/Application/Models/" />
-        <mkdir dir="${default}builds/TotemMVC/production/Application/Views" />
+        <mkdir dir="${default}builds/TotemWeb" />
+        <mkdir dir="${default}builds/TotemWeb/production/" />
+        <mkdir dir="${default}builds/TotemWeb/production/Application/" />
+        <mkdir dir="${default}builds/TotemWeb/production/Application/Controllers/" />
+        <mkdir dir="${default}builds/TotemWeb/production/Application/DomainObjects/" />
+        <mkdir dir="${default}builds/TotemWeb/production/Application/Lib/" />
+        <mkdir dir="${default}builds/TotemWeb/production/Application/Models/" />
+        <mkdir dir="${default}builds/TotemWeb/production/Application/Views" />
+        <mkdir dir="${default}builds/TotemWeb/production/Cache/" />
+        <mkdir dir="${default}builds/TotemWeb/production/Configuration/" />
+        <mkdir dir="${default}builds/TotemWeb/production/Log/" />
+        <copy file="src/TotemApp.php" tofile="${default}builds/TotemWeb/production/Application/TotemApp.php" />
+        <copy file="src/build.xml" tofile="${default}builds/TotemWeb/build.xml" />
 
-        <copy todir="${default}builds/TotemMVC/development/">
-            <fileset dir="${default}builds/TotemMVC/production/" />
+        <copy todir="${default}builds/TotemWeb/development/">
+            <fileset dir="${default}builds/TotemWeb/production/" />
         </copy>
-        <copy file="src/TotemApp.php" tofile="${default}builds/TotemMVC/production/Application/TotemApp.php" />
-        <copy file="src/TotemApp.php" tofile="${default}builds/TotemMVC/development/Application/TotemApp.php" />
-
-        <mkdir dir="${default}builds/TotemMVC/lib/" />
-        <mkdir dir="${default}builds/TotemMVC/lib/SPL/" />
-        <copy file="src/lib/SPL/SplClassLoader.php" tofile="${default}builds/TotemMVC/lib/SPL/SplClassLoader.php" />
         
-        <mkdir dir="${default}builds/TotemMVC/webroot/" />
-        <copy file="src/webroot/.htaccess" tofile="${default}builds/TotemMVC/webroot/.htaccess" />
-        <copy file="src/webroot/index.php" tofile="${default}builds/TotemMVC/webroot/index.php" />
-    </target>
-    
-    <target name="makelibs">
+        <mkdir dir="${default}builds/TotemWeb/totem/" />
+        <mkdir dir="${default}builds/TotemWeb/totem/webroot/" />
+        <copy file="src/webroot/.htaccess" tofile="${default}builds/TotemWeb/totem/webroot/.htaccess" />
+        <copy file="src/webroot/index.php" tofile="${default}builds/TotemWeb/totem/webroot/index.php" />
+        
         <ant antfile="src/lib/core_build.xml" inheritAll="none" />
-        <move file="src/lib/Totem.Core.phar" tofile="${default}builds/TotemMVC/lib/Totem.Core.phar" />
-        <ant antfile="src/lib/view_build.xml" inheritAll="none" />
-        <move file="src/lib/Totem.View.phar" tofile="${default}builds/TotemMVC/lib/Totem.View.phar" />
-        <ant antfile="src/lib/model_build.xml" inheritAll="none" />
-        <move file="src/lib/Totem.Model.phar" tofile="${default}builds/TotemMVC/lib/Totem.Model.phar" />
+        <move file="src/lib/Totem.Core.phar" tofile="${default}builds/TotemWeb/totem/Totem.Core.phar" />
+        
+        <copy file="LICENSE" tofile="${default}builds/TotemWeb/LICENSE" />
     </target>
     
     <target name="clean">
         <delete file="composer.lock" />
         <delete dir="${default}builds/Respect" />
-        <delete dir="${default}builds/TotemMVC" />
+        <delete dir="${default}builds/TotemWeb" />
     </target>
 </project>
