@@ -9,7 +9,7 @@
 <project name="TotemWeb Management Tools" basedir="." >
     <target name="promote-changes">
         <tstamp />
-        <property name="bu-path" value="bu/${TSTAMP}" />
+        <property name="bu-path" value="bu/${DSTAMP}-${TSTAMP}" />
         
         <!-- Create backup -->
         <mkdir dir="${bu-path}" />
