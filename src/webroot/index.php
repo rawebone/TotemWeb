@@ -7,7 +7,7 @@
  * @homepage http://gettotem.com
  */
 
-$base = dirname(dirname(__DIR__)); $app = ""; $lib = "";
+$base = dirname(__DIR__); $app = "";
 
 // Get the application path
 if (isset($_SERVER['TotemAppPath']))
@@ -23,33 +23,17 @@ else
     $app = "$base/production";
 }
 
-// Get the library path
-if (isset($_SERVER['TotemLibPath']))
-{
-    $lib = $_SERVER['TotemLibPath'];
-}
-elseif (strpos(ini_get("variables_order"), "E") !== false && isset($_ENV['TotemLibPath']))
-{
-    $lib = $_ENV['TotemLibPath'];
-}
-else
-{
-    $lib = "$base/";
-}
-
 define('TOTEM_APP', $app);
-define('TOTEM_PATH', $lib);
-unset($base, $app, $lib);
 
 //  Application Autoloading
-spl_autoload_register(function($class) {
+spl_autoload_register(function($class) use ($app) {
     if (strpos($class, "Application\\") === false)
     {
         return;
     }
         
     $class = str_replace("\\", "/", $class);
-    if (!include TOTEM_APP . "$class.php")
+    if (!include "$app/$class.php")
     {
         throw new \Exception("Cannot load $class");
     }
@@ -57,7 +41,7 @@ spl_autoload_register(function($class) {
 
 try
 {
-    require_once "phar://" . TOTEM_PATH . "/Totem.Core.phar";
+    require_once "phar://$base/Totem.Core.phar";
     $application = new Application\TotemApp();
     if ($application instanceof Totem\Core\ApplicationInterface)
     {
