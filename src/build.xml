@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!--
-    This file is part of the TotemMVC project and provides tools for managing the website.
+    This file is part of the TotemWeb project and provides tools for managing the website.
     
-    Licence: http://www.opensource.org/licenses/MIT
+    Licence: http://assets.gettotem.com/docs/LICENSE
     Author: N Rawe
     Homepage: http://gettotem.com
 -->
@@ -20,6 +20,12 @@
         <!-- Move development to production -->
         <copy todir="production/Application">
             <fileset dir="development/Application" includes="*/**" />
+        </copy>
+    </target>
+    <target name="fork-production-development">
+        <!-- Move production application to development -->
+        <copy todir="development/Application">
+            <fileset dir="production/Application" includes="*/**" />
         </copy>
     </target>
 </project>
