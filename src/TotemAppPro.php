@@ -18,7 +18,7 @@ class TotemApp implements \Totem\Core\ApplicationInterface
 {
     public function run()
     {
-        echo "Hello, from TotemMVC";
+        echo file_get_contents(TOTEM_APP . "Application/Views/DefaultMessage.html");
     }
 }
 

@@ -21,22 +21,36 @@
         <mkdir dir="${default}builds/TotemWeb/production/Cache/" />
         <mkdir dir="${default}builds/TotemWeb/production/Configuration/" />
         <mkdir dir="${default}builds/TotemWeb/production/Log/" />
-        <copy file="src/TotemApp.php" tofile="${default}builds/TotemWeb/production/Application/TotemApp.php" />
         <copy file="src/build.xml" tofile="${default}builds/TotemWeb/build.xml" />
 
         <copy todir="${default}builds/TotemWeb/development/">
             <fileset dir="${default}builds/TotemWeb/production/" />
         </copy>
         
+        <!-- Default production site -->
+        <copy file="src/TotemAppPro.php" tofile="${default}builds/TotemWeb/production/Application/TotemApp.php" />
+        <copy file="src/DefaultMessage.html" tofile="${default}builds/TotemWeb/production/Application/Views/DefaultMessage.html" />
+        
+        <!-- Default development Site -->
+        <copy file="src/TotemAppDev.php" tofile="${default}builds/TotemWeb/development/Application/TotemApp.php" />
+       
         <mkdir dir="${default}builds/TotemWeb/totem/" />
         <mkdir dir="${default}builds/TotemWeb/totem/webroot/" />
         <copy file="src/webroot/.htaccess" tofile="${default}builds/TotemWeb/totem/webroot/.htaccess" />
         <copy file="src/webroot/index.php" tofile="${default}builds/TotemWeb/totem/webroot/index.php" />
+        <mkdir dir="${default}builds/TotemWeb/totem/webroot/assets/" />
+        <mkdir dir="${default}builds/TotemWeb/totem/webroot/assets/css/" />
+        <mkdir dir="${default}builds/TotemWeb/totem/webroot/assets/docs/" />
+        <mkdir dir="${default}builds/TotemWeb/totem/webroot/assets/js/" />
         
         <ant antfile="src/lib/core_build.xml" inheritAll="none" />
         <move file="src/lib/Totem.Core.phar" tofile="${default}builds/TotemWeb/totem/Totem.Core.phar" />
         
         <copy file="LICENSE" tofile="${default}builds/TotemWeb/LICENSE" />
+        
+        <mkdir dir="${default}builds/TotemWeb/docs" />
+        <copy file="SampleApacheConfig.conf" tofile="${default}builds/TotemWeb/docs/SampleApacheConfig.conf" />
+        
         <tar basedir="${default}builds/TotemWeb/" destfile="${default}builds/TotemWeb.tar.gz" compression="gzip" />
     </target>
     
@@ -44,5 +58,6 @@
         <delete file="composer.lock" />
         <delete dir="${default}builds/Respect" />
         <delete dir="${default}builds/TotemWeb" />
+        <delete file="{$default}builds/TotemWeb.tar.gz" />
     </target>
 </project>
