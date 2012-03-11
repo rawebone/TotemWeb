@@ -53,7 +53,7 @@ try
 }
 catch (\Exception $e)
 {
-    echo "TotemMVC cannot run the requested application: " . $e->getMessage();
+    echo "TotemWeb cannot run the requested application: " . $e->getMessage();
 }
 
 ?>
